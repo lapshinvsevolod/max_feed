@@ -59,12 +59,9 @@
                 document.getElementById('time_' + counter).textContent = formatDate(datetime);
             }
         }
+        setTimeout(run, 1000);
     }
     run()
-    let intervalId = window.setInterval(function(){
-        run()
-    }, 5000);
-    
 </script>
 </body>
 </html>
