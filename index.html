@@ -48,7 +48,7 @@
         while (counter < iterations) {
             let previous = datetime;
             datetime = addMinutes(datetime);
-            if ((datetime.getTime() - new Date().getTime()) / 1000 < intervalSeconds) {
+            if ((datetime.getTime() - new Date().getTime()) / 1000 < intervalSeconds && (datetime.getTime() - new Date().getTime()) / 1000 > 0) {
                 document.getElementById('time_previous').textContent = formatDate(previous);
                 next = datetime;
                 startCount = true;
