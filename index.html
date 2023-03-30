@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Кормления макса</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-3">
+    <div class="col-12 d-flex flex-column justify-content-center">
+        <h1 class="text-center">Кормления Макса</h1>
+        <h2 id="time_previous" class="text-muted text-center mt-3">Hello, world!</h2>
+        <h1 id="time_1" class="text-center">Hello, world!</h1>
+        <h3 id="time_2" class="text-muted text-center">Hello, world!</h3>
+        <h4 id="time_3" class="text-muted text-center">Hello, world!</h4>
+        <h5 id="time_4" class="text-muted text-center">Hello, world!</h5>
+        <h6 id="time_5" class="text-muted text-center">Hello, world!</h6>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+<script>
+    const start = new Date('03-30-2023 15:00:00');
+    let intervalMinutes = 3.5 * 60;
+    let intervalSeconds = intervalMinutes * 60;
+
+
+    function addMinutes(date) {
+        return new Date(date.getTime() + intervalMinutes * 60000);
+    }
+
+    function formatDate(date) {
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        let strTime = hours + ':' + minutes;
+        return strTime + " " + date.getDate() + "." + (date.getMonth()+1) + "." + date.getFullYear();
+    }
+
+    function run() {
+        let iterations = 5;
+        let counter = 0;
+        let startCount = false;
+        let next;
+        let datetime = start;
+        while (counter < iterations) {
+            let previous = datetime;
+            datetime = addMinutes(datetime);
+            if ((datetime.getTime() - new Date().getTime()) / 1000 < intervalSeconds) {
+                document.getElementById('time_previous').textContent = formatDate(previous);
+                next = datetime;
+                startCount = true;
+            }
+
+            if (startCount) {
+                counter++
+                document.getElementById('time_' + counter).textContent = formatDate(datetime);
+            }
+        }
+    }
+    run()
+    let intervalId = window.setInterval(function(){
+        run()
+    }, 5000);
+    
+</script>
+</body>
+</html>
